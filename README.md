@@ -17,8 +17,8 @@ firmware. So the sensors only do a part of what they should be doing. Your compa
 Your company stands for high quality and happy customers.
 
 The people of the operations team should check every incoming batch of sensors (up to 250) if they can be shipped or not. 
-However, these people are very valuable. They shouldn’t manually check up to 250 sensors to check if the firmware version 
-will work with the latest firmware. They have other more important work to do.
+However, these people are very valuable. They shouldn’t manually check up to 250 sensors to know which sensors can be shipped
+and which ones can't. 
 
 What they need is an automated solution that can check up to 250 sensor serial numbers (or ids) and give the current status 
 of that sensor.
@@ -30,13 +30,14 @@ In addition, while automating sensor work anyway, have the solution update the c
 
 ## Detailed use case
 
-For every incoming shipment of sensors, the operations team can download a .csv file containing the id's of the sensors
-that have been shipped. a list of sensor IDs and you want to know if these sensors are ready to be shipped or not. If not, you need 
-to schedule the next step in order to make it shippable. A sensor is ready to be shipped when its firmware is appropriate 
-and if the configuration is the latest configuration.
+For every incoming shipment of sensors, the operations team can download [a .csv file containing the id's](src/main/resources/samples/sample.csv) 
+of the sensors that have been shipped. It is this list that needs to be veryfied as they want to know if these sensors are 
+ready to be shipped or not. 
+If not, you need to schedule the next step in order to make it shippable. A sensor is ready to be shipped when 
+its firmware is appropriate and if the configuration is the latest configuration.
 
 So for each sensor with its id in the list, you need to check if the firmware is appropriate so that the latest configuration 
-can run without problems. Currently, firmware with version 59.1.12Rev4 or higher is appropriate. Don’t forget to schedule a 
+can run without problems. Currently, firmware with version **59.1.12Rev4** or higher is appropriate. Don’t forget to schedule a 
 task for the configuration and if needed, a task for to updte the firmware.
 
 You need to use [the API of the original manufacturer](Manufacturers_api.md) to get the current sensor information and to schedule tasks such as 
