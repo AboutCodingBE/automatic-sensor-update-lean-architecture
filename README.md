@@ -37,8 +37,11 @@ If not, you need to schedule the next step in order to make it shippable. A sens
 its firmware is appropriate and if the configuration is the latest configuration.
 
 So for each sensor with its id in the list, you need to check if the firmware is appropriate so that the latest configuration 
-can run without problems. Currently, firmware with version **59.1.12Rev4** or higher is appropriate. Don’t forget to schedule a 
-task for the configuration and if needed, a task for to updte the firmware.
+can run without problems. Currently, firmware with version **59.1.12Rev4** or higher is appropriate. Schedule a firmware update 
+task when necessary. If the firmware is appropriate, check if the configuration is the latest one. If not, update the 
+configuration. 
+
+We also don't want to schedule a configuration update if there is a firmware update scheduled. 
 
 You need to use [the API of the original manufacturer](Manufacturers_api.md) to get the current sensor information and to schedule tasks such as 
 a firmware update and a configuration update.

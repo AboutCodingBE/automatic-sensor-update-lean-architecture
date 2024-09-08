@@ -41,8 +41,6 @@ public class SensorInformationClient {
             log.error("The id {} return no sensor information because it triggered an error", id);
             return Optional.empty();
         }
-
         return Optional.ofNullable(response.getBody());
     }
-
 }
