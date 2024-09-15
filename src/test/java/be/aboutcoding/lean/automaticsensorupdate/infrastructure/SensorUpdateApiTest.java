@@ -17,8 +17,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,6 +42,26 @@ class SensorUpdateApiTest {
                 .andExpect(status().isOk());
 
         verify(statusProcess, times(1)).checkFor(List.of(123435L, 67890L, 34234455677L));
+    }
+
+    @Test
+    void should_deal_correctly_with_empty_file() throws Exception {
+        var idFile = aMultipartFileOf("file", "examples/empty_sensors.csv");
+
+        mockMvc.perform(multipart("/sensor/status")
+                .file(idFile))
+                .andExpect(status().isOk());
+
+        verify(statusProcess, times(1)).checkFor(List.of());
+    }
+
+    @Test
+    void should_correctly_deal_with_faulty_id_file() throws Exception {
+        var idFile = aMultipartFileOf("file", "examples/invalid_sensors.csv");
+
+        mockMvc.perform(multipart("/sensor/status")
+                        .file(idFile))
+                .andExpect(status().isBadRequest());
     }
 
     private MockMultipartFile aMultipartFileOf(String fileParameterName, String location) throws Exception {
