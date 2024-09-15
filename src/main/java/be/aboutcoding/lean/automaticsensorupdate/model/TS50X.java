@@ -1,19 +1,17 @@
 package be.aboutcoding.lean.automaticsensorupdate.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class TS50X {
     private static final String VALID_FIRMWARE_VERSION = "59.1.12Rev4";
     public static final String TARGET_CONFIGURATION = "ts50x-20230811T10301211.cfg";
 
-    @Getter
     private final Long id;
     private final String currentFirmwareVersion;
     private final String currentConfiguration;
-    @Getter
-    @Setter
-    private ShippingStatus status;
+
+    private ShippingStatus status = ShippingStatus.UNKNOWN;
 
     public TS50X(Long id, String firmwareVersion, String configuration) {
         if (id == null || id < 0) {
@@ -25,10 +23,6 @@ public class TS50X {
         this.id = id;
         this.currentFirmwareVersion = firmwareVersion;
         this.currentConfiguration = configuration;
-    }
-
-    public boolean isUpdatingFirmware() {
-        return this.status.equals(ShippingStatus.UPDATING_FIRMWARE);
     }
 
     public boolean hasLatestConfiguration() {

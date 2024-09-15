@@ -26,9 +26,12 @@ public class CheckSensorStatusProcess {
                 taskClient.scheduleFirmwareUpdateFor(sensor.getId());
                 sensor.setStatus(ShippingStatus.UPDATING_FIRMWARE);
             }
-            if (!sensor.isUpdatingFirmware() && !sensor.hasLatestConfiguration()) {
+            else if (!sensor.hasLatestConfiguration()) {
                 taskClient.scheduleConfigurationUpdateFor(sensor.getId());
                 sensor.setStatus(ShippingStatus.UPDATING_CONFIGURATION);
+            }
+            else {
+                sensor.setStatus(ShippingStatus.READY);
             }
         }
         return targetSensors;
