@@ -19,6 +19,7 @@ public class SensorInformationClient {
     private final RestTemplate restTemplate;
 
     public SensorInformationClient(@Value("${api.base-url}") String baseUrl, RestTemplateBuilder templateBuilder) {
+        System.out.println(baseUrl);
         this.restTemplate = templateBuilder.rootUri(baseUrl).build();
     }
 

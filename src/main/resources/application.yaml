@@ -1,2 +1,2 @@
 api:
-  base-url: "localhost:8080/api"
+  base-url: "http://www.mysensors.com/api"

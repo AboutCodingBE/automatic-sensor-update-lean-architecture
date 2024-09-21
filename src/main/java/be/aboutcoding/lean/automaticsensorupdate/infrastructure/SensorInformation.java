@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public record SensorInformation(@JsonProperty Long serial,
                                 @JsonProperty String type,
                                 @JsonProperty Integer statusId,
-                                @JsonProperty String currentConfiguration,
-                                @JsonProperty String  currentFirmware) {
+                                @JsonProperty("current_configuration") String currentConfiguration,
+                                @JsonProperty("current_firmware") String  currentFirmware) {
 
     public static TS50X toTS50X(SensorInformation info) {
         return new TS50X(info.serial, info.currentFirmware(), info.currentConfiguration());
