@@ -45,6 +45,18 @@ class SensorUpdateApiTest {
     }
 
     @Test
+    void should_correctly_parse_sensor_ids_with_inmemory_file() throws Exception {
+        // setup
+        var idFile = anInMemoryMultipartFile("file");
+
+        mockMvc.perform(multipart("/sensor/status")
+                        .file(idFile))
+                .andExpect(status().isOk());
+
+        verify(statusProcess, times(1)).checkFor(List.of(123435L, 67890L, 34234455677L));
+    }
+
+    @Test
     void should_deal_correctly_with_empty_file() throws Exception {
         var idFile = aMultipartFileOf("file", "examples/empty_sensors.csv");
 
@@ -70,6 +82,18 @@ class SensorUpdateApiTest {
                 "sensors.csv",
                 MediaType.TEXT_PLAIN_VALUE,
                 inputStream);
+    }
+
+    private MockMultipartFile anInMemoryMultipartFile(String fileParameterName) throws Exception {
+        var fileContents = """
+                id, type
+                123435, TS50X
+                67890, TS50X
+                34234455677, TS50X
+                """;
+
+        byte[] inputArray = fileContents.getBytes();
+        return new MockMultipartFile(fileParameterName,inputArray);
     }
 
 }

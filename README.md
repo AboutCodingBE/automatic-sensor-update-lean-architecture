@@ -58,3 +58,5 @@ That will be tackled in the next run.
 and assume that the average REST call takes 0.1 seconds (that is a very optimistic average). For the maximum amount of ids, that 
 means 25s before we get any result. In case all the target sensors are bad, we need to do 2 rest calls (to fetch the sensor info and 
 to schedule a task), that could easily become 50 seconds and result in a time out. We should do something about that. 
+
+That is what the evolutions are about. 

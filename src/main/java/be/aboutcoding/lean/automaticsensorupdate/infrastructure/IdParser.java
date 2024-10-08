@@ -17,7 +17,10 @@ public class IdParser implements Function<MultipartFile, List<Long>> {
 
     @Override
     public List<Long> apply(MultipartFile file) {
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
+        try (BufferedReader fileReader = new BufferedReader(
+                new InputStreamReader(file.getInputStream(),
+                        StandardCharsets.UTF_8)
+        );
              var csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
 
